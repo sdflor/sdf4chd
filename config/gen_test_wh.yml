@@ -1,0 +1,69 @@
+data:
+  output_dir: pretrained/sdf4chd_final
+  train_dir: data/processed_segs
+  test_dir: data/processed_segs
+  point_sampling_factor: 20
+  tmplt_sdf: data/processed_segs/pytorch/pulse_00002_artery.pkl
+
+net:
+  out_dim: 1
+  n_conv_blocks: 5
+  z_t_dim: 32
+  z_s_dim: 27
+  type_mlp_num: 6
+  ds_mlp_num: 6
+  dx_mlp_num: 6
+  latent_dim: 512
+  encoder: false
+  encoder_in_dim: 1
+  ins_norm: true
+  lip_reg: true
+  l_dim: 4
+  test_l_dim: 4
+  two_shape_codes: true
+  step_size: 0.2
+  use_diag: false
+  use_type: false
+train:
+  alter: true
+  binary: true
+  save_every: 5 #500
+  init: false
+  lip_weight: 1.e-8
+  has_unlabeled: false
+  epoch: 200 #2000
+  lr: 0.0001
+  n_smpl_pts: 16384 
+  pad_num: 10 #parameter of the padding 
+  scheduler:
+    factor: 0.7
+    patience: 20
+  latent_scheduler:
+    factor: 0.7
+    patience: 20
+  latent_lr: 0.001
+  batch_size: 16
+  alter:
+      joint_num: 0
+      alter_num: 5
+      end_num: 1000
+  weights:
+      recons_loss: 2.
+      recons_noDs_loss: 2.
+      gaussian_t_loss: 0.
+      gaussian_s_loss: 0.01
+      div_integral: 0.0
+      grad_mag: 0.
+test_ops:
+  type_pred: false
+  type_interp: false
+  train_dice: false
+  test_dice: false
+  shape_type_interp: false
+  shape_gen: true
+  invertible: false
+  vsd_variation: false
+  rand_type_gen: false
+
+
+resume: 0

@@ -1,0 +1,58 @@
+data:
+  output_dir: /scratch/users/fwkong/CHD/output/wh_raw_tests_cleanedall/GenLargeWHSep3/Ours_final_Apr11/DeepSDF_TypeSpatial_latent4_noCond
+  train_dir: /scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned
+  test_dir: /scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned
+  chd_info:
+    diag_fn: /scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned/imageCHD_dataset_WH_diagnosis_info-apr5updates_fake0.xlsx
+    diag_sn: Sheet1
+    types: ['ASD','VSD','DORV', 'PuA','ToF','TGA']
+    exclude_types: ['SV', 'HLHS', 'AVSD']
+  point_sampling_factor: 20
+  tmplt_sdf: /scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned/pytorch/ct_1017_image.pkl
+net:
+  out_dim: 7
+  n_conv_blocks: 5
+  z_t_dim: 32
+  z_s_dim: 27
+  type_mlp_num: 6
+  ds_mlp_num: 6
+  dx_mlp_num: 6
+  latent_dim: 512
+  encoder: false
+  encoder_in_dim: 1
+  ins_norm: true
+  lip_reg: true
+  l_dim: 4
+  test_l_dim: 4
+  two_shape_codes: true
+  step_size: 0.2
+  use_diag: false
+train:
+  alter: true
+  binary: true
+  init: true
+  lip_weight: 1.e-8
+  has_unlabeled: false
+  epoch: 2000
+  lr: 0.0001
+  n_smpl_pts: 16384
+  pad_num: 25
+  scheduler:
+    factor: 0.7
+    patience: 20
+  latent_scheduler:
+    factor: 0.7
+    patience: 20
+  latent_lr: 0.001
+  batch_size: 4
+  alter:
+      joint_num: 0
+      alter_num: 5
+      end_num: 1000
+  weights:
+      recons_loss: 2.
+      recons_noDs_loss: 2.
+      gaussian_t_loss: 0.
+      gaussian_s_loss: 0.01
+      div_integral: 0.0
+      grad_mag: 0.

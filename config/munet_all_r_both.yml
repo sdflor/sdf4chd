@@ -1,0 +1,19 @@
+data:
+  output_dir: /scratch/users/fwkong/CHD/output/wh_raw_tests_cleanedall/UNets/aug7_real_cutoffkeepmiddle_2dunet_shuffle
+  train_dir: ['/scratch/users/fwkong/SharedData/imageCHDCleanedOriginal_aligned_all/aligned_aug_processed', '/scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned']
+  test_dir: '/scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned_cleaned/'
+  chd_info:
+    diag_fn: /scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned/imageCHD_dataset_WH_diagnosis_info-mar27updates.xlsx
+    diag_sn: Sheet1
+    types: ['ASD','VSD','DORV', 'PuA','ToF','TGA']
+    exclude_types: ['SV', 'HLHS', 'AVSD']
+net:
+  n_classes: 8
+train:
+  epoch: 300
+  batch_size: 16
+  lr: 0.0001
+  scheduler:
+    factor: 0.8
+    patience: 20
+  #train_dir: ['/scratch/users/fwkong/CHD/output/wh_raw_tests_cleanedall/GenLargeWHSep3/Ours_final_Apr11/alter5Joint1000_latent4_lipx100_NOuseDiag_Init1017_DivMag0.01_Pad0_GradMag0_smplfac20_twophase/train_2200/shape_gen', '/scratch/users/fwkong/CHD/imageCHDCleanedOriginal_aligned_all/whole_heart_processed_topology_fixed_aligned']
